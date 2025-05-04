@@ -57,7 +57,7 @@ const getEditorTemplate = () => {
 };
 
 // Create a new instance of the code editor
-export const create = (parent, options = {}) => {
+window.codecakeCreate = (parent, options = {}) => {
     let prevCode = "", linesCount = -1, focus = false, escKeyPressed = false;
     const listeners = {}; // Store events listeners
     const tab = options?.indentWithTabs ? "\t" : " ".repeat(options.tabSize || 4);
@@ -450,6 +450,7 @@ const _highlight = (code, rules) => {
     return text;
 };
 
-export const highlight = (code, language = "javascript") => {
-    return _highlight(code, languages[language]?.rules || []);
+window.codecakeHighlight = (code, language = "javascript") => {
+// window.highlight = (code, language = "javascript") => {
+     return _highlight(code, languages[language]?.rules || []);
 };

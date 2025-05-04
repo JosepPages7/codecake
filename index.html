@@ -5,31 +5,27 @@
         <meta name="title" content="CodeCake">
         <link rel="stylesheet" href="./codecake.css">
         <style>
-            html, body {
+            /* html, body {
                 margin: 0;
                 padding: 0;
                 width: 100%;
                 height: 100%;
-            }
+            } */
 
             #editor {
-                width: 100%;
-                height: 100%;
-                border: 1px solid #ddd; /* Optional: Light gray border */
-                box-sizing: border-box; /* Include padding and border in width/height */
-                background-color: #fafafa;
-                padding: 4px;
+                width: 400px;
+                height: 500px;
             }
         </style>        
     </head>
     <body >
-        <div style="margin: 0 auto; padding: 20px; width: 50%; height: 50%; max-width: 800px;">
+        <div >
             <div id="editor"  ></div>
         </div>
         <button id="insertButton" style="margin: 20px;">Insert "Hello world"</button>
         <button id="getCode" style="margin: 20px;">Get Code</button>
-        <script type="module">
-            import * as CodeCake from "./codecake.js";
+        <script src="codecake.js"></script>  <script>
+            // Your initialization code here
 
             var cake;
     
@@ -40,15 +36,44 @@
                 `};`,
                 ``,
                 `// Expected: 4`,
-                `console.log(sum(2, 2));`,
+                `console.log(sum(2, 2));`
+                ,
+                `function sum(a, b) {`,
+                `    return a + b;`,
+                `};`,
+                ``,
+                `// Expected: 4`,
+                `console.log(sum(2, 2));`
+                ,
+                `function sum(a, b) {`,
+                `    return a + b;`,
+                `};`,
+                ``,
+                `// Expected: 4`,
+                `console.log(sum(2, 2));`
+                ,
+                `function sum(a, b) {`,
+                `    return a + b;`,
+                `};`,
+                ``,
+                `// Expected: 4`,
+                `console.log(sum(2, 2));`
+                ,
+                `function sum(a, b) {`,
+                `    return a + b;`,
+                `};`,
+                ``,
+                `// Expected: 4`,
+                `console.log(sum(2, 2));`
+                ,
             ];
 
             // Initialize example editor
-            cake = CodeCake.create(parent, {
+            cake = window.codecakeCreate(parent, {
                 code: exampleCode.join("\n"),
                 className: "codecake-light",
-                lineNumbers: true,
-                highlight: code => CodeCake.highlight(code, "javascript"),
+                lineNumbers: false,
+                highlight: code => window.codecakeHighlight(code, "javascript"),
             });
 
             // Add event listener to the button
