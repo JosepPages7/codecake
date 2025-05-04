@@ -92,6 +92,25 @@ export const create = (parent, options = {}) => {
         prevCode = editor.textContent || "";
         update(wait ?? 50);
     };
+    const insertCodeAtCursor = (newCode, wait) => {
+        editor.focus();
+        const sel = window.getSelection();
+        if (sel == null) return;
+        const range = sel.getRangeAt(0);
+    
+        // Insert the new code at the current cursor position
+        const textNode = document.createTextNode(newCode);
+        range.insertNode(textNode);
+    
+        // Move the cursor to the end of the inserted text
+        range.setStartAfter(textNode);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    
+        // Update the editor content
+        prevCode = editor.textContent || "";
+        update(wait ?? 50);    
+    };
     const getCode = () => editor.textContent || "";
     const getCodeBefore = () => getCodeBeforeOrAfter(editor, -1);
     const getCodeAfter = () => getCodeBeforeOrAfter(editor, +1);
@@ -199,6 +218,7 @@ export const create = (parent, options = {}) => {
     return {
         getCode: () => getCode(),
         setCode: code => setCode(code || "", 1),
+        insertCodeAtCursor: code => insertCodeAtCursor(code || "", 1),
         onChange: listener => (listeners["change"] = listener),
         onKeyDown: listener => (listeners["keydown"] = listener),
         onKeyUp: listener => (listeners["keyup"] = listener),
